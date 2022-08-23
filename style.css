@@ -437,7 +437,6 @@ body {
 }
 .eldrich-item:hover {
 	cursor: pointer;
-	border: 3px solid #aed9e0;
 	background-size: 600px 600px;
 }
 .level-wrapper {
@@ -459,6 +458,7 @@ body {
 	height: 30px;
 	margin: 5px;
 	color: #fff;
+	user-select: none; 
 }
 .level-list {
 	opacity: 0.8;
@@ -472,6 +472,12 @@ body {
 	width: 200px;
 	height: 30px;
 	margin: 5px;
+	user-select: none; 
+}
+
+.level-item--active {
+	color: #4d5baa;
+	text-decoration: underline;
 }
 
 .button-go {
@@ -505,9 +511,11 @@ body {
 }
 .step-label {
 	padding: 10px;
+	user-select: none; 
 }
 .call-list {
 	display: flex;
+	
 }
 .cell {
 	display: flex;
@@ -521,6 +529,7 @@ body {
 	border: solid black;
 	color: #fff;
 	font-weight: 600;
+	user-select: none; 
 }
 .cell:nth-of-type(1) {
 	background-color: #395e15;

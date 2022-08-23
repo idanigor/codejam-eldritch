@@ -3,7 +3,7 @@ import blueCards from './blue/index.js'
 import greenCards from './green/index.js'
 
 export {
+  greenCards,
   brownCards,
   blueCards,
-  greenCards
 }
