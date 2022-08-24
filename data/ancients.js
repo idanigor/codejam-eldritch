@@ -5,6 +5,7 @@ const ancientsData = {
 		// id: 'azathoth',
 		// name: 'azathoth',
 		//cardFace: Ancients.azathoth,
+		// sumCards: 16,
 		firstStage: {
 			greenCards: 1,
 			brownCards: 2,
@@ -25,6 +26,7 @@ const ancientsData = {
 		// id: 'cthulhu',
 		// name: 'cthulhu',
 		//cardFace: Ancients.cthulhu,
+		// sumCards: 15,
 		firstStage: {
 			greenCards: 0,
 			brownCards: 2,
@@ -45,6 +47,7 @@ const ancientsData = {
 		// id: 'iogSothoth',
 		// name: 'iogSothoth',
 		//cardFace: Ancients.iogSothoth,
+		// sumCards: 16,
 		firstStage: {
 			greenCards: 0,
 			brownCards: 2,
@@ -65,6 +68,7 @@ const ancientsData = {
 		// id: 'shubNiggurath',
 		// name: 'shubNiggurath',
 		//cardFace: Ancients.shubNiggurath,
+		// sumCards: 16,
 		firstStage: {
 			greenCards: 1,
 			brownCards: 2,
