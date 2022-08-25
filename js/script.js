@@ -5,6 +5,7 @@ const eldrichList = document.querySelector('.eldrich-list')
 const counterList = document.querySelector('.counter-list')
 const levelList = document.querySelector('.level-list')
 const btnGo = document.querySelector('.button-go')
+const btnBack = document.querySelector('.button-back')
 const mythClose = document.querySelector('.myth-close')
 const mythOpen = document.querySelector('.myth-open')
 const stepLabel = document.querySelectorAll('.step-label')
@@ -16,6 +17,7 @@ let packArray = []
 let mainPackArray = []
 let reservedPackArray = []
 let headPack = []
+let start = false
 
 function getRandomArray(arr) {
 	for (let i = arr.length - 1; i > 0; i--) {
@@ -36,6 +38,7 @@ function getRandomNum(min, max) {
 eldrichList.addEventListener('click', (event) => {
 	ancientsCallArray = []
 	if (event.target.classList[0] === 'eldrich-item') {
+		start = false
 		selectAncient = ancientsData[event.target.id]
 		for (let key in selectAncient) {
 			ancientsCallArray.push(Object.values(selectAncient[key]))
@@ -63,6 +66,8 @@ eldrichList.addEventListener('click', (event) => {
 	}
 	document.querySelector('.myth-close').classList.add('visible-off')
 	document.querySelector('.myth-open').classList.add('visible-off')
+	btnBack.classList.add('button-off')
+	btnGo.classList.remove('button-off')
 	{
 		for (const e of stepLabel) {
 			e.classList.remove('step-label--over')
@@ -72,6 +77,7 @@ eldrichList.addEventListener('click', (event) => {
 
 levelList.addEventListener('click', (event) => {
 	if (event.target.classList[0] === 'level-item') {
+		start = false
 		if (eldrichList.querySelector('.eldrich-item--active')) {
 			eldrichList.querySelector('.eldrich-item--active').click()
 		}
@@ -197,14 +203,30 @@ function getPackArrayNormal() {
 	}
 }
 
-btnGo.addEventListener('click', (event) => {
+btnGo.addEventListener('click', () => {
 	if (
 		eldrichList.querySelector('.eldrich-item--active') &&
-		levelList.querySelector('.level-item--active')
+		levelList.querySelector('.level-item--active') &&
+		start === false
 	) {
 		mythClose.classList.remove('visible-off')
 		mythOpen.classList.remove('visible-off')
 		mythOpen.style.backgroundImage = `url()`
+		start = true
+		btnBack.classList.remove('button-off')
+		btnGo.classList.add('button-off')
+	}
+})
+
+btnBack.addEventListener('click', () => {
+	if (
+		eldrichList.querySelector('.eldrich-item--active') &&
+		levelList.querySelector('.level-item--active')
+	) {
+		let tmp = document.querySelector('.level-item--active')
+		document.querySelector('.eldrich-item--active').click()
+		tmp.click()
+		btnGo.click()
 	}
 })
 
@@ -262,4 +284,8 @@ function rndItem(i) {
 	}
 }
 
-console.log(`Задание выполнено полностью. 105 баллов. Если Вы нашли ошибку  - свяжитесь пожалуйста со мной или укажите при кросс-чеке Ваш аккаунт. Иду на отлично, для меня Важно получить максимальный балл. Спасибо!`)
+function btnSplit() {}
+
+console.log(
+	`Задание выполнено полностью. 105 баллов. Если Вы нашли ошибку  - свяжитесь пожалуйста со мной или укажите при кросс-чеке Ваш аккаунт. Иду на отлично, для меня Важно получить максимальный балл. Спасибо!`
+)

@@ -492,7 +492,7 @@ body {
 	border: 2px solid #aed9e0;
 }
 
-.button--off {
+.button-off {
 	display: none;
 }
 
@@ -500,7 +500,8 @@ body {
 	color: aqua;
 	opacity: 1;
 }
-.button-go:hover {
+.button-go:hover,
+.button-back:hover {
 	color: aqua;
 	opacity: 1;
 	border: 2px solid aqua;
