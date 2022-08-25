@@ -449,6 +449,7 @@ body {
 	background-color: rgba(0, 0, 0, 0.4);
 	border-radius: 10px;
 	text-align: center;
+	align-self: center;
 }
 .level-label {
 	display: flex;
@@ -463,8 +464,13 @@ body {
 .level-list {
 	opacity: 0.8;
 }
+.level-list--off {
+	user-select: none;
+}
+
 .level-item,
-.button-go {
+.button-go,
+.button-back {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -480,10 +486,16 @@ body {
 	text-decoration: underline;
 }
 
-.button-go {
+.button-go,
+.button-back {
 	margin: 10px 5px 10px 5px;
 	border: 2px solid #aed9e0;
 }
+
+.button--off {
+	display: none;
+}
+
 .level-item:hover {
 	color: aqua;
 	opacity: 1;
@@ -504,6 +516,8 @@ body {
 	background-color: rgba(0, 0, 0, 0.4);
 	border-radius: 10px;
 	text-align: center;
+	align-items: center;
+	align-self: center;
 }
 .counter-list {
 }
@@ -512,6 +526,10 @@ body {
 .step-label {
 	padding: 10px;
 	user-select: none;
+}
+.step-label--over {
+	text-decoration: line-through;
+	color: #4d5baa;
 }
 .call-list {
 	display: flex;

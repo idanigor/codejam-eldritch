@@ -1,8 +1,6 @@
 console.log('script')
 import ancientsData from '../data/ancients.js'
-import difficulties from '../data/difficulties.js'
 import { greenCards, brownCards, blueCards } from '../data/mythicCards/index.js'
-import { idan } from './test.js'
 
 const eldrichList = document.querySelector('.eldrich-list')
 const counterList = document.querySelector('.counter-list')
@@ -10,6 +8,7 @@ const levelList = document.querySelector('.level-list')
 const btnGo = document.querySelector('.button-go')
 const mythClose = document.querySelector('.myth-close')
 const mythOpen = document.querySelector('.myth-open')
+const stepLabel = document.querySelectorAll('.step-label')
 
 let selectAncient
 let sumCards = []
@@ -18,10 +17,6 @@ let packArray = []
 let mainPackArray = []
 let reservedPackArray = []
 let headPack = []
-
-// console.log(blueCards[1].cardFace)
-// mythOpen.style.backgroundImage = `url(${blueCards[1].cardFace})` // раздача
-// mythOpen.style.backgroundImage = `url('../assets/MythicCards/blue/blue1.png')`
 
 function getRandomArray(arr) {
 	for (let i = arr.length - 1; i > 0; i--) {
@@ -32,6 +27,7 @@ function getRandomArray(arr) {
 	}
 	return arr
 }
+
 function getRandomNum(min, max) {
 	min = Math.ceil(min)
 	max = Math.floor(max)
@@ -47,7 +43,6 @@ eldrichList.addEventListener('click', (event) => {
 		}
 		const step = counterList.querySelectorAll('.step')
 
-		//! вывести в отдельную функцию при pop с колоды
 		for (let i = 0; i < step.length; i++) {
 			const cell = step[i].querySelectorAll('.cell')
 			for (let j = 0; j < cell.length; j++) {
@@ -61,37 +56,55 @@ eldrichList.addEventListener('click', (event) => {
 		}
 		event.target.classList.add('eldrich-item--active')
 		if (headPack.length > 0) {
-			console.log('lf')
 			headPack = []
 			levelList
 				.querySelector('.level-item--active')
 				.classList.remove('level-item--active')
 		}
 	}
-	console.log(headPack)
 	document.querySelector('.myth-close').classList.add('visible-off')
 	document.querySelector('.myth-open').classList.add('visible-off')
+	{
+		for (const e of stepLabel) {
+			e.classList.remove('step-label--over')
+		}
+	}
 })
 
 levelList.addEventListener('click', (event) => {
 	if (event.target.classList[0] === 'level-item') {
+		if (eldrichList.querySelector('.eldrich-item--active')) {
+			eldrichList.querySelector('.eldrich-item--active').click()
+		}
 		sumAncient()
-
 		if (event.target.id === 'very-easy') {
-			console.log('да')
 			getPackArrayVery('easy')
 		}
 		if (event.target.id === 'very-hard') {
-			console.log('да')
 			getPackArrayVery('hard')
 		}
-
+		if (event.target.id === 'easy') {
+			getPackArray('easy')
+		}
+		if (event.target.id === 'hard') {
+			getPackArray('hard')
+		}
+		if (event.target.id === 'normal') {
+			getPackArrayNormal()
+		}
 		if (levelList.querySelector('.level-item--active')) {
 			levelList
 				.querySelector('.level-item--active')
 				.classList.remove('level-item--active')
 		}
 		event.target.classList.add('level-item--active')
+		{
+			for (const e of stepLabel) {
+				e.classList.remove('step-label--over')
+			}
+		}
+		document.querySelector('.myth-close').classList.add('visible-off')
+		document.querySelector('.myth-open').classList.add('visible-off')
 	}
 })
 
@@ -113,7 +126,7 @@ function sumAncient() {
 	}
 }
 
-//! очень лёгкий
+//! очень лёгкий и очень тяжелый
 
 function getArrayColorAndDifficulty(obj, difficulty) {
 	const arrColor = []
@@ -156,25 +169,50 @@ function getPackArrayVery(level) {
 	}
 }
 
-// //! очень тяжелый
+//! легкий и тяжелый
 
-// function getPackArrayVeryHard() {
-// 	packArray = []
-// 	mainPackArray = []
-// 	reservedPackArray = []
+function getPackArray(level) {
+	packArray = []
+	mainPackArray = []
+	reservedPackArray = []
+	headPack = []
 
-// 	mainPackArray.push(getArrayColorAndDifficulty(greenCards, 'hard'))
-// 	mainPackArray.push(getArrayColorAndDifficulty(brownCards, 'hard'))
-// 	mainPackArray.push(getArrayColorAndDifficulty(blueCards, 'hard'))
-// 	packArray.push(mainPackArray)
+	mainPackArray.push(getArrayColorAndDifficulty(greenCards, level))
+	mainPackArray.push(getArrayColorAndDifficulty(brownCards, level))
+	mainPackArray.push(getArrayColorAndDifficulty(blueCards, level))
+	packArray.push(mainPackArray)
 
-// 	reservedPackArray.push(getArrayColorAndDifficulty(greenCards, 'normal'))
-// 	reservedPackArray.push(getArrayColorAndDifficulty(brownCards, 'normal'))
-// 	reservedPackArray.push(getArrayColorAndDifficulty(blueCards, 'normal'))
-// 	packArray.push(reservedPackArray)
-// }
+	reservedPackArray.push(getArrayColorAndDifficulty(greenCards, 'normal'))
+	reservedPackArray.push(getArrayColorAndDifficulty(brownCards, 'normal'))
+	reservedPackArray.push(getArrayColorAndDifficulty(blueCards, 'normal'))
+	packArray.push(reservedPackArray)
 
-//! лёгкий
+	for (let i = 0; i < 3; i++) {
+		mainPackArray[i].push(...reservedPackArray[i])
+		console.log(mainPackArray)
+		getRandomArray(mainPackArray[i])
+		headPack.push(mainPackArray[i].slice(0, sumCards[i]))
+		getRandomArray(headPack[i])
+	}
+}
+
+//! средний
+
+function getPackArrayNormal() {
+	packArray = []
+	mainPackArray = []
+	reservedPackArray = []
+	headPack = []
+
+	headPack.push(greenCards)
+	headPack.push(brownCards)
+	headPack.push(blueCards)
+
+	for (let i = 0; i < 3; i++) {
+		getRandomArray(headPack[i])
+	}
+	console.log(headPack)
+}
 
 btnGo.addEventListener('click', (event) => {
 	if (
@@ -183,13 +221,11 @@ btnGo.addEventListener('click', (event) => {
 	) {
 		mythClose.classList.remove('visible-off')
 		mythOpen.classList.remove('visible-off')
+		mythOpen.style.backgroundImage = `url()`
 	}
 })
 
 mythClose.addEventListener('click', (event) => {
-	console.log(headPack)
-	console.log(ancientsCallArray)
-
 	for (let i = 0; i < 3; i++) {
 		if (
 			ancientsCallArray[i][0] +
@@ -200,15 +236,38 @@ mythClose.addEventListener('click', (event) => {
 			let tmpRnd = rndItem(i) // 1 - зеленый, 2 - коричневый, 3 - синий
 			let tmpItem = ancientsCallArray[i][tmpRnd] // значение в ячейке. осталось...
 
-			console.log(tmpRnd, '0 - зеленый, 1 - коричневый, 2 - синий')
-			console.log(tmpItem, `значение в ячейке. осталось...`)
+			ancientsCallArray[i][tmpRnd] = tmpItem - 1
+			counterList.querySelectorAll('.step')[i].querySelectorAll('.cell')[
+				tmpRnd
+			].innerHTML = tmpItem - 1
+			mythOpen.style.backgroundImage = `url(${
+				headPack[tmpRnd][headPack[tmpRnd].length - 1].cardFace
+			})`
+			headPack[tmpRnd].pop()
+			if (
+				ancientsCallArray[i][0] +
+					ancientsCallArray[i][1] +
+					ancientsCallArray[i][2] ===
+				0
+			) {
+				if (i === 0) {
+					stepLabel[0].classList.add('step-label--over')
+				}
+				if (i === 1) {
+					stepLabel[1].classList.add('step-label--over')
+				}
+				if (i === 2) {
+					stepLabel[2].classList.add('step-label--over')
+				}
+			}
 			return
 		} else {
-			console.log(`сумма строки ${i} = 0. Красим стадию как завершенную! `)
+			if (i === 2) {
+				alert('Game over')
+				window.location.reload()
+			}
 		}
 	}
-
-	mythOpen.style.backgroundImage = `url(${blueCards[1].cardFace})`
 })
 
 function rndItem(i) {
