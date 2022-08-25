@@ -392,7 +392,7 @@ body {
 	line-height: 1;
 	color: #aed9e0;
 	background-color: #fff;
-	background-image: url('/assets/home.png');
+	background-image: url('./assets/home.png');
 	background-position: center;
 	background-size: auto;
 }
@@ -409,16 +409,16 @@ body {
 }
 
 #azathoth {
-	background-image: url('/assets/Ancients/Azathoth.png');
+	background-image: url('./assets/Ancients/Azathoth.png');
 }
 #cthulthu {
-	background-image: url('/assets/Ancients/Cthulthu.png');
+	background-image: url('./assets/Ancients/Cthulthu.png');
 }
 #iogsothoth {
-	background-image: url('/assets/Ancients/IogSothoth.png');
+	background-image: url('./assets/Ancients/IogSothoth.png');
 }
 #shubniggurath {
-	background-image: url('/assets/Ancients/ShubNiggurath.png');
+	background-image: url('./assets/Ancients/ShubNiggurath.png');
 }
 .footer {
 	display: flex;
@@ -567,7 +567,7 @@ body {
 	gap: 20px;
 }
 .myth-close {
-	background-image: url('/assets/mythicCardBackground.png');
+	background-image: url('./assets/mythicCardBackground.png');
 	width: 204px;
 	height: 300px;
 	background-repeat: no-repeat;
