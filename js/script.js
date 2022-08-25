@@ -206,7 +206,6 @@ btnGo.addEventListener('click', (event) => {
 		mythOpen.classList.remove('visible-off')
 		mythOpen.style.backgroundImage = `url()`
 	}
-	console.log(headPack)
 })
 
 mythClose.addEventListener('click', (event) => {
